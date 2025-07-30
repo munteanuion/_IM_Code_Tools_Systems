@@ -1,0 +1,14 @@
+{
+  "name": "com.munteanuion._IM_Code_Tools_Systems",
+  "version": "1.0.0",
+  "displayName": "_IM_Code_Tools_Systems",
+  "description": "Support Telegram: @MunteanuIon. \n\n_IM_Code_Tools_Systems",
+  "unity": "2021.3",
+  "author": {
+    "name": "munteanuion",
+    "url": "https://github.com/munteanuion/_IM_Code_Tools_Systems"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  }
+}
