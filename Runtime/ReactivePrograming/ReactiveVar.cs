@@ -48,7 +48,7 @@ namespace ReactivePrograming
             return subscriber;
         }
 
-        public void Remove(Subscriber<T, T> subscriber) => _toRemoveSubscribers.Remove(subscriber);
+        public void Remove(Subscriber<T, T> subscriber) => _toRemoveSubscribers.Add(subscriber);
 
         
         
