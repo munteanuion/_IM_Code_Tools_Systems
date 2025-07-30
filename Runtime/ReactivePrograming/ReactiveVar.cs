@@ -33,7 +33,8 @@ namespace ReactivePrograming
                 _value = value;
 
                 if (_comparer.Equals(_value,oldValue) == false)
-                    OnChanged?.Invoke(oldValue, _value);
+                    foreach (var subscriber in _subscribers)
+                        subscriber.Invoke(oldValue, _value);
             }
         }
     }
