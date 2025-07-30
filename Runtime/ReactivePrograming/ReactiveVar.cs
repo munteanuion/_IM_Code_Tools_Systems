@@ -6,6 +6,9 @@ namespace ReactivePrograming
     public class ReactiveVar<T>
     {
         private readonly List<Subscriber<T, T>> _subscribers = new();
+        private readonly List<Subscriber<T, T>> _toAddSubscribers = new();
+        private readonly List<Subscriber<T, T>> _toRemoveSubscribers = new();
+        
         private readonly IEqualityComparer<T> _comparer;
         private T _value;
 
@@ -33,9 +36,40 @@ namespace ReactivePrograming
                 _value = value;
 
                 if (_comparer.Equals(_value,oldValue) == false)
-                    foreach (var subscriber in _subscribers)
-                        subscriber.Invoke(oldValue, _value);
+                    Invoke(oldValue, _value);
             }
+        }
+
+        
+        public IDisposable Subscribe(Action<T,T> action)
+        {
+            Subscriber<T, T> subscriber = new Subscriber<T, T>(action, Remove);
+            _toAddSubscribers.Add(subscriber);
+            return subscriber;
+        }
+
+        public void Remove(Subscriber<T, T> subscriber) => _toRemoveSubscribers.Remove(subscriber);
+
+        
+        
+        private void Invoke(T oldValue, T newValue)
+        {
+            if (_toAddSubscribers.Count > 0)
+            {
+                _subscribers.AddRange(_toAddSubscribers);
+                _toAddSubscribers.Clear();
+            }
+            
+            if (_toRemoveSubscribers.Count > 0)
+            {
+                foreach (Subscriber<T,T> subscriber in _toRemoveSubscribers)
+                    _subscribers.Remove(subscriber);
+                
+                _toRemoveSubscribers.Clear();
+            }
+
+            foreach (Subscriber<T,T> subscriber in _subscribers)
+                subscriber.Invoke(oldValue, newValue);
         }
     }
 }
