@@ -1,6 +1,6 @@
 namespace ReactivePrograming
 {
-    public interface IReadOnlyReactiveVar<T>
+    public interface IReadOnlyVar<T>
     {
         T Value { get; }
     }

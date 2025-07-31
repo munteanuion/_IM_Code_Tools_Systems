@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ReactivePrograming
 {
-    public class ReactiveVar<T> : IReadOnlyReactiveVar<T>
+    public class ReactiveVar<T> : IReadOnlyVar<T>
     {
         private readonly List<Subscriber<T, T>> _subscribers = new();
         private readonly List<Subscriber<T, T>> _toAddSubscribers = new();
