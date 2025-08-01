@@ -2,8 +2,16 @@
     "name": "_IM_Code_Tools_Systems",
     "rootNamespace": "_IM_Code_Tools_Systems",
     "references": [
+        "GUID:0c752da273b17c547ae705acf0f2adf2",
+        "GUID:aab3caaf43456d6449a3e035348ff798",
+        "GUID:44d09cf463b68274884d8a3c8a94e528",
+        "GUID:194213485063a984b98ce9410892267a",
         "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:029c1c1b674aaae47a6841a0b89ad80e"
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e",
+        "GUID:593a5b492d29ac6448b1ebf7f035ef33",
+        "GUID:4129704b5a1a13841ba16f230bf24a57",
+        "GUID:5c01796d064528144a599661eaab93a6",
+        "GUID:dc47925d1a5fa2946bdd37746b2b5d48"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
