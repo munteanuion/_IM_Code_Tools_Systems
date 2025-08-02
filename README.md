@@ -6,4 +6,7 @@ TODO List:
 * Event Bus System
 * DI container
 * Static extensions methods
+* scriptable object arhitecture with reactive var and scriptable variables (ca in AC)
+* save system
+* bootstraper -> single entry point for acenes without place in scene atached to scene asset or name and entry point without ref in inspector and initialize on load
 * 
