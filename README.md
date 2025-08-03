@@ -9,4 +9,4 @@ TODO List:
 * scriptable object arhitecture with reactive var and scriptable variables (ca in AC)
 * save system
 * bootstraper -> single entry point for acenes without place in scene atached to scene asset or name and entry point without ref in inspector and initialize on load
-* 
+* Player Spawn System in gameplay and for testing in editor mode from position when is set scene windfow camera(like that unreal)
