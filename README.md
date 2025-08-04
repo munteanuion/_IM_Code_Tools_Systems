@@ -11,3 +11,7 @@ TODO List:
 * bootstraper -> single entry point for acenes without place in scene atached to scene asset or name and entry point without ref in inspector and initialize on load
 * Player Spawn System in gameplay and for testing in editor mode from position when is set scene windfow camera(like that unreal)
 * Gizmos component for vizualize in editor analog with malbers
+* Actions events list class and call when in code exec action event(class contain fmod event sound, enable disable obj...)
+* particle container class and play for all when event is exec from code example shoot...
+
+
