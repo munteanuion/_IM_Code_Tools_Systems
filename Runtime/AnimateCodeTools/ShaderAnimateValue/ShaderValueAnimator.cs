@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -42,6 +43,7 @@ namespace _CodeTools.ShaderCodeTools
     {
         private ShaderValueAnimatorInspector m_fields;
         
+        private CancellationTokenSource m_cancelationToken;
         private int m_shaderFieldNameID;
         private List<Material> m_materialInstance;
 
@@ -57,6 +59,7 @@ namespace _CodeTools.ShaderCodeTools
         {
             m_shaderFieldNameID = Shader.PropertyToID(m_fields.ShaderFieldName);
             m_materialInstance = new List<Material>(16);
+            m_cancelationToken = new CancellationTokenSource();
             
             foreach (var VARIABLE in m_fields.MaterialMeshRenderer)
             {
@@ -81,6 +84,11 @@ namespace _CodeTools.ShaderCodeTools
 #endif
             }
             m_materialInstance.Clear();
+            if (m_cancelationToken != null && !m_cancelationToken.IsCancellationRequested)
+            {
+                m_cancelationToken.Cancel();
+                m_cancelationToken.Dispose();
+            }
         }
         
         
@@ -123,8 +131,14 @@ namespace _CodeTools.ShaderCodeTools
                 tween = material.DOFloat(targetValue, m_shaderFieldNameID, m_fields.AnimDuration);
             }
             
-            //if (tween != null)
-                //await tween.AsyncWaitForCompletion();
+            if (tween != null && tween.active)
+            {
+                try {
+                    while (tween.active && !tween.IsComplete()) {
+                        await UniTask.Yield(PlayerLoopTiming.Update, m_cancelationToken.Token);
+                    }
+                } catch (OperationCanceledException) { }
+            }
 #endif
         }
     }
