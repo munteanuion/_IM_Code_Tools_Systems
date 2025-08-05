@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ReactivePrograming
 {
-    public class ReactiveVar<T> : IReadOnlyVar<T>
+    public class ReactiveVar<T> : IReadOnlyVar<T>, IDisposable
     {
         private readonly List<Subscriber<T, T>> _subscribers = new();
         private readonly List<Subscriber<T, T>> _toAddSubscribers = new();
@@ -41,25 +41,50 @@ namespace ReactivePrograming
         }
 
         
-        public IDisposable Subscribe(Action<T,T> action)
+        
+        public IDisposable Subscribe(Action<T,T> action, bool invokeOnSubscribe = true)
         {
             Subscriber<T, T> subscriber = new Subscriber<T, T>(action, Remove);
             _toAddSubscribers.Add(subscriber);
+            
+            if (invokeOnSubscribe) subscriber.Invoke(_value, _value);
+            
             return subscriber;
         }
-
-        public void Remove(Subscriber<T, T> subscriber) => _toRemoveSubscribers.Add(subscriber);
-
+        
+        public void UnSubscribeAll()
+        {
+            SortSubscribersLists();
+            
+            for (int i = _subscribers.Count - 1; i >= 0; i--)
+                _subscribers[i].Dispose();
+            
+            SortSubscribersLists();
+        }
+        
+        public void Dispose() => UnSubscribeAll();
+        public void UnSubscribe(IDisposable subscription) => subscription.Dispose();
+        private void Remove(Subscriber<T, T> subscriber) => _toRemoveSubscribers.Add(subscriber);
+        
         
         
         private void Invoke(T oldValue, T newValue)
+        {
+            SortSubscribersLists();
+
+            foreach (Subscriber<T,T> subscriber in _subscribers)
+                subscriber.Invoke(oldValue, newValue);
+        }
+
+        
+        private void SortSubscribersLists()
         {
             if (_toAddSubscribers.Count > 0)
             {
                 _subscribers.AddRange(_toAddSubscribers);
                 _toAddSubscribers.Clear();
             }
-            
+
             if (_toRemoveSubscribers.Count > 0)
             {
                 foreach (Subscriber<T,T> subscriber in _toRemoveSubscribers)
@@ -67,9 +92,6 @@ namespace ReactivePrograming
                 
                 _toRemoveSubscribers.Clear();
             }
-
-            foreach (Subscriber<T,T> subscriber in _subscribers)
-                subscriber.Invoke(oldValue, newValue);
         }
     }
 }

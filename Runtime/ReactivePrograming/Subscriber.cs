@@ -17,8 +17,14 @@ namespace ReactivePrograming
         
         
         
-        public void Dispose() => _onDispose?.Invoke(this);
-        
+        public void Dispose()
+        {
+            _onDispose?.Invoke(this);
+            _action = null;
+            _onDispose = null;
+        }
+
+
         public void Invoke(T arg1, K arg2) => _action?.Invoke(arg1, arg2);
     }
 }
