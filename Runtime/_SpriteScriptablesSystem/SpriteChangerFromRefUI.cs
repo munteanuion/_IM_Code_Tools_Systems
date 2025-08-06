@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.__Project.Scripts.UI
+namespace Tools.UI
 {
     public class SpriteChangerFromRefUI : MonoBehaviour
     {

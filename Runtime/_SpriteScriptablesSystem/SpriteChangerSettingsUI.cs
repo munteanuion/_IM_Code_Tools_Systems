@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.__Project.Scripts.UI
+namespace Tools.UI
 {
     [CreateAssetMenu(fileName = "SpriteDataUI", menuName = "Scriptables/Sprite Changer", order = 0)]
     public class SpriteChangerSettingsUI : ScriptableObject
