@@ -2,6 +2,7 @@ Installing : Unity->Package Manager->Click Button + ->Select Git URL->Paste URL:
 
 TODO List:
 
+* init system abstract class for all abjects with spawners and without , int for order init, and try with dependence injection
 * Add Script for Behaviour Animator State for send message ca sa chemam de exemplu sunet fmod (send message de facut prin manager static event bus si sa fie dynamic subscriber acolo in dictionary cu o cheita string sau mai bine Enum daca e posibil sa nu fie apiceatca)
 * Event Bus System
 * DI container
