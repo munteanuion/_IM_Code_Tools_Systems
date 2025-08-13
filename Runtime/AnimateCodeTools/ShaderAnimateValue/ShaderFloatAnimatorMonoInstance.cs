@@ -3,26 +3,25 @@ using UnityEngine;
 
 namespace _CodeTools.ShaderCodeTools
 {
-    public class ShaderValueAnimatorMonoInstance : MonoBehaviour, IDisposable
+    public class ShaderFloatAnimatorMonoInstance : MonoBehaviour, IDisposable
     {
-        [SerializeField] private ShaderValueAnimatorInspector m_shaderValueAnimatorFields;
+        [SerializeField] private ShaderFloatAnimatorInspector m_shaderFloatAnimatorFields;
         [SerializeField] private bool m_autoInitialize = true;
 
-        private ShaderValueAnimator m_shaderValueAnimator;
+        private ShaderFloatAnimator m_shaderFloatAnimator;
         
-
 
         
         public void Init()
         {
-            m_shaderValueAnimator = new ShaderValueAnimator(m_shaderValueAnimatorFields); 
-            m_shaderValueAnimator.Init();
+            m_shaderFloatAnimator = new ShaderFloatAnimator(m_shaderFloatAnimatorFields); 
+            m_shaderFloatAnimator.Init();
         }
         
         public void Dispose()
         {
-            m_shaderValueAnimator.Dispose();
-            m_shaderValueAnimator = null;
+            m_shaderFloatAnimator.Dispose();
+            m_shaderFloatAnimator = null;
         }
 
         private void OnEnable()
@@ -47,36 +46,36 @@ namespace _CodeTools.ShaderCodeTools
         [ContextMenu("Play Full Animation")]
         public void PlayFullAnimation()
         {
-            if (m_shaderValueAnimator != null)
+            if (m_shaderFloatAnimator != null)
             {
-                m_shaderValueAnimator.PlayFullAnimation();
+                m_shaderFloatAnimator.PlayFullAnimation();
             }
         }
         
-        [ContextMenu("(Show)Start Animation To End Value")]
+        [ContextMenu("(Show)Start Animation To End Float")]
         public void StartAnimation()
         {
-            if (m_shaderValueAnimator != null)
+            if (m_shaderFloatAnimator != null)
             {
-                m_shaderValueAnimator.StartAnimationToEndValue();
+                m_shaderFloatAnimator.StartAnimationToEndFloat();
             }
         }
         
-        [ContextMenu("(Hide)Start Animation To Default Value")]
+        [ContextMenu("(Hide)Start Animation To Default Float")]
         public void StopAnimation()
         {
-            if (m_shaderValueAnimator != null)
+            if (m_shaderFloatAnimator != null)
             {
-                m_shaderValueAnimator.StartAnimationToDefaultValue();
+                m_shaderFloatAnimator.StartAnimationToDefaultFloat();
             }
         }
         
         [ContextMenu("Instant Kill All Animation")]
         public void InstantKillAllAnimation()
         {
-            if (m_shaderValueAnimator != null)
+            if (m_shaderFloatAnimator != null)
             {
-                m_shaderValueAnimator.KillAnimations();
+                m_shaderFloatAnimator.KillAnimations();
             }
         }
     }

@@ -11,7 +11,7 @@ using DG.Tweening;
 namespace _CodeTools.ShaderCodeTools
 {
     [System.Serializable]
-    public class ShaderValueAnimatorInspector
+    public class ShaderFloatAnimatorInspector
     {
         [field: Header("Animation Settings")]
         [field: SerializeField] public float DefaultStartValue { get; private set; } = 0.1f;
@@ -24,9 +24,9 @@ namespace _CodeTools.ShaderCodeTools
         [field: SerializeField] public Renderer[] MaterialMeshRenderer { get; private set; }
 
 
-        public ShaderValueAnimatorInspector() { }
+        public ShaderFloatAnimatorInspector() { }
         
-        public ShaderValueAnimatorInspector(float defaultStartValue, float endAnimValue, float animDuration, string shaderFieldName, int[] indexesMaterial, Renderer[] materialMeshRenderer)
+        public ShaderFloatAnimatorInspector(float defaultStartValue, float endAnimValue, float animDuration, string shaderFieldName, int[] indexesMaterial, Renderer[] materialMeshRenderer)
         {
             DefaultStartValue = defaultStartValue;
             EndAnimValue = endAnimValue;
@@ -39,20 +39,22 @@ namespace _CodeTools.ShaderCodeTools
     
     
     
-    public class ShaderValueAnimator : IDisposable
+    [System.Serializable]
+    public class ShaderFloatAnimator : IDisposable
     {
-        private ShaderValueAnimatorInspector m_fields;
+        [field: SerializeField] private ShaderFloatAnimatorInspector m_fields;
         
         private CancellationTokenSource m_cancelationToken;
         private int m_shaderFieldNameID;
         private List<Material> m_materialInstance;
 
 
-        
 
-        public ShaderValueAnimator(ShaderValueAnimatorInspector shaderValueAnimatorInspector)
+
+        public ShaderFloatAnimator() { }
+        public ShaderFloatAnimator(ShaderFloatAnimatorInspector shaderFloatAnimatorInspector)
         {
-            m_fields = shaderValueAnimatorInspector;
+            m_fields = shaderFloatAnimatorInspector;
         }
         
         public void Init()
@@ -96,16 +98,16 @@ namespace _CodeTools.ShaderCodeTools
         
         public async UniTask PlayFullAnimation()
         {
-            await StartAnimationToEndValue();
-            await StartAnimationToDefaultValue();
+            await StartAnimationToEndFloat();
+            await StartAnimationToDefaultFloat();
         }
         
-        public async UniTask StartAnimationToEndValue()
+        public async UniTask StartAnimationToEndFloat()
         {
             await AnimateToCustomFloat(m_fields.EndAnimValue);
         }
 
-        public async UniTask StartAnimationToDefaultValue()
+        public async UniTask StartAnimationToDefaultFloat()
         {
             await AnimateToCustomFloat(m_fields.DefaultStartValue);
         }
