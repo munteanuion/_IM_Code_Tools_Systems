@@ -160,6 +160,15 @@ namespace ThisProject.__Project.Scripts.Helpers
         #endregion
 
     
+/*public static async void InitializeMusic()
+        {
+            // Wait until all banks are loaded
+            await UniTask.WaitWhile(() => !RuntimeManager.HaveAllBanksLoaded);
+            
+            PlayMusicPermanentEvent(Event.Music_M_Music);
+            //SetGlobalParameter(FMODParameters.Scene,FMODParameters.Scene_All_Labels.MainMenu);
+        }*/
+
 
         #region Music Persistent Event
 
