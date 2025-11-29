@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if false
+
+using System;
 using UnityEngine;
 
 namespace _CodeTools.ShaderCodeTools
@@ -80,3 +82,5 @@ namespace _CodeTools.ShaderCodeTools
         }
     }
 }
+
+#endif
