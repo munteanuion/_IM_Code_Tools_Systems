@@ -14,14 +14,14 @@ namespace _IM_Code_Tools_Systems.SaveSystem
         Json
     }
 
-    public class SaveSystemEncrypted
+    public class SaveSystem
     {
         private readonly string _saveDirectory;
         private readonly byte[] _key;
         private readonly byte[] _iv;
         private readonly SaveFormat _format;
 
-        public SaveSystemEncrypted(string folderName = "Saves", string password = "DefaultStrongPassword123", SaveFormat format = SaveFormat.Binary)
+        public SaveSystem(string folderName = "Saves", string password = "DefaultStrongPassword123", SaveFormat format = SaveFormat.Binary)
         {
             if (string.IsNullOrWhiteSpace(folderName))
                 throw new ArgumentException("Folder name cannot be null or whitespace.", nameof(folderName));

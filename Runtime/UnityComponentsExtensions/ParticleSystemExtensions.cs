@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UnityIteratorComponentContainers
 {
-    public static class ParticleSystemArrayExtensions
+    public static class ParticleSystemExtensions
     {
         public static void PlayAll(this ParticleSystem[] systems, bool withChildren = true)
         {
