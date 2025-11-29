@@ -3,6 +3,7 @@ Installing : Unity->Package Manager->Click Button + ->Select Git URL->Paste URL:
 Ready Solutions To Use For Code:
 * Extenject (Zenject fork) -> https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source
 * UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
+* PrimeTween -> https://github.com/KyryloKuzyk/PrimeTween?tab=readme-ov-file#install-via-unity-package-manager-upm
 
 Ready Solutions To Use For Editor:
 * NaughtyAttributes -> https://github.com/dbrizov/NaughtyAttributes.git#upm
