@@ -1,13 +1,13 @@
 Installing : Unity->Package Manager->Click Button + ->Select Git URL->Paste URL: https://github.com/munteanuion/_IM_Code_Tools_Systems.git
 
 Ready Solutions To Use For Code:
-Extenject (Zenject fork) -> https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source
-UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
+* Extenject (Zenject fork) -> https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source
+* UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
 
 Ready Solutions To Use For Editor:
-NaughtyAttributes -> https://github.com/dbrizov/NaughtyAttributes.git#upm
-HeapExplorer -> https://github.com/pschraut/UnityHeapExplorer.git#4.3.0
-FastReload -> https://github.com/handzlikchris/FastScriptReload.git?path=Assets
+* NaughtyAttributes -> https://github.com/dbrizov/NaughtyAttributes.git#upm
+* HeapExplorer -> https://github.com/pschraut/UnityHeapExplorer.git#4.3.0
+* FastReload -> https://github.com/handzlikchris/FastScriptReload.git?path=Assets
 
 TODO List:
 
