@@ -9,8 +9,6 @@
     "url": "https://github.com/munteanuion/_IM_Code_Tools_Systems.git"
   },
   "dependencies": {
-    "com.unity.nuget.newtonsoft-json": "3.2.1",
-    "com.cysharp.unitask": "2.5.10",
-    "com.svermeulen.extenject": "9.3.1"
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
   }
 }
