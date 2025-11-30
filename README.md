@@ -5,7 +5,7 @@ Ready Solutions To Use For Code:
 * UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
 * PrimeTween -> https://github.com/KyryloKuzyk/PrimeTween?tab=readme-ov-file#install-via-unity-package-manager-upm
 * SerializedDictionary -> https://github.com/ayellowpaper/SerializedDictionary.git
-* SerializeRefInterface -> https://github.com/ayellowpaper/ReferenceInterfaces.git
+* SerializeRefInterface -> https://github.com/munteanuion/ReferenceInterfaces.git
 
 Ready Solutions To Use For Editor:
 * NaughtyAttributes -> https://github.com/dbrizov/NaughtyAttributes.git#upm
