@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace _IM_Code_Tools_Systems.Plugins._IM_Code_Tools_Systems.Runtime.CollidersInteractionWrapper
+namespace CollidersInteractionWrapper
 {
     [Serializable]
     public class CollidersInteractContainer

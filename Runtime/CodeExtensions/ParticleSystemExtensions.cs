@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityIteratorComponentContainers
+namespace CodeExtensions
 {
     public static class ParticleSystemExtensions
     {
