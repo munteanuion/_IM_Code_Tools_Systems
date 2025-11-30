@@ -4,6 +4,8 @@ Ready Solutions To Use For Code:
 * Extenject (Zenject fork) -> https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source
 * UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
 * PrimeTween -> https://github.com/KyryloKuzyk/PrimeTween?tab=readme-ov-file#install-via-unity-package-manager-upm
+* SerializedDictionary -> https://github.com/ayellowpaper/SerializedDictionary.git
+* SerializeRefInterface -> https://github.com/ayellowpaper/ReferenceInterfaces.git
 
 Ready Solutions To Use For Editor:
 * NaughtyAttributes -> https://github.com/dbrizov/NaughtyAttributes.git#upm
