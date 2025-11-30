@@ -15,12 +15,12 @@ namespace PrimeTweenExtensions
         [Serializable]
         public enum TweenAnimType
         {
-            LocalPosition,
-            LocalRotation,
-            LocalScale,
-            Position,
-            Rotation,
-            Scale
+            LocalPosition = 1,
+            LocalRotation = 2,
+            LocalScale = 3,
+            Position = 4,
+            Rotation = 5,
+            Scale = 6
         }
 
         [Serializable]
@@ -74,13 +74,12 @@ namespace PrimeTweenExtensions
             _isPlaying = true;
             foreach (var tween in tweenSequence)
             {
-                if (!tween.animateAsync)
-                    _ = PlayTween(tween);
-            }
-            foreach (var tween in tweenSequence)
-            {
+                if (!_isPlaying) return;
+                
                 if (tween.animateAsync)
                     await PlayTween(tween);
+                else
+                    _ = PlayTween(tween);
             }
         }
 
@@ -101,7 +100,7 @@ namespace PrimeTweenExtensions
                     await Tween.LocalPosition(target, item.vector3Settings).AsyncWaitForCompletion();
                     break;
                 case TweenAnimType.LocalRotation:
-                    await Tween.LocalRotation(target, item.vector3Settings).AsyncWaitForCompletion();
+                    await Tween.LocalEulerAngles(target, item.vector3Settings).AsyncWaitForCompletion();
                     break;
                 case TweenAnimType.LocalScale:
                     await Tween.LocalScale(target, item.vector3Settings).AsyncWaitForCompletion();
@@ -110,7 +109,7 @@ namespace PrimeTweenExtensions
                     await Tween.Position(target, item.vector3Settings).AsyncWaitForCompletion();
                     break;
                 case TweenAnimType.Rotation:
-                    await Tween.Rotation(target, item.vector3Settings).AsyncWaitForCompletion();
+                    await Tween.EulerAngles(target, item.vector3Settings).AsyncWaitForCompletion();
                     break;
                 case TweenAnimType.Scale:
                     await Tween.Scale(target, item.vector3Settings).AsyncWaitForCompletion();
@@ -137,7 +136,7 @@ namespace PrimeTweenExtensions
                         transform1.localPosition = tween.vector3Settings.startValue;
                         break;
                     case TweenAnimType.LocalRotation:
-                        transform1.localRotation = Quaternion.Euler(tween.vector3Settings.startValue);
+                        transform1.localEulerAngles = tween.vector3Settings.startValue;
                         break;
                     case TweenAnimType.LocalScale:
                         transform1.localScale = tween.vector3Settings.startValue;
@@ -146,7 +145,7 @@ namespace PrimeTweenExtensions
                         transform1.position = tween.vector3Settings.startValue;
                         break;
                     case TweenAnimType.Rotation:
-                        transform1.rotation = Quaternion.Euler(tween.vector3Settings.startValue);
+                        transform1.eulerAngles = tween.vector3Settings.startValue;
                         break;
                     case TweenAnimType.Scale:
                         transform1.localScale = tween.vector3Settings.startValue;
