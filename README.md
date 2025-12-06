@@ -1,7 +1,7 @@
 Installing : Unity->Package Manager->Click Button + ->Select Git URL->Paste URL: https://github.com/munteanuion/_IM_Code_Tools_Systems.git
 
 Ready Solutions To Use For Code:
-* Zenject -> https://github.com/modesttree/Zenject.git
+* Zenject -> https://github.com/modesttree/Zenject.git?path=UnityProject/Assets/Plugins/Zenject
 * UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
 * PrimeTween -> https://github.com/KyryloKuzyk/PrimeTween?tab=readme-ov-file#install-via-unity-package-manager-upm
 * SerializedDictionary -> https://github.com/ayellowpaper/SerializedDictionary.git
