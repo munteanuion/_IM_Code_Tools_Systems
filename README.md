@@ -2,6 +2,7 @@ Installing : Unity->Package Manager->Click Button + ->Select Git URL->Paste URL:
 
 Ready Solutions To Use For Code:
 * Zenject -> https://github.com/modesttree/Zenject.git?path=UnityProject/Assets/Plugins/Zenject
+* vContainer -> https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.17.0
 * UniTask -> https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask
 * PrimeTween -> https://github.com/KyryloKuzyk/PrimeTween?tab=readme-ov-file#install-via-unity-package-manager-upm
 * SerializedDictionary -> https://github.com/ayellowpaper/SerializedDictionary.git
