@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Scripts._AbstractSystems.StateMachine
 {
-    public abstract class StateMachine : IStateMachine
+    public class StateMachine : IStateMachine
     {
         public IState CurrentState { get; protected set; }
         public IState PreviousState { get; protected set; }
