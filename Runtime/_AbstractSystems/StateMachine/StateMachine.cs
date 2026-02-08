@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using _Scripts._Extensions;
+using UnityEngine;
 
 namespace _Scripts._AbstractSystems.StateMachine
 {
@@ -14,7 +14,7 @@ namespace _Scripts._AbstractSystems.StateMachine
         {
             if (States.Count == 0)
             {
-                this.Log("No states available. Cannot set next state.");
+                Debug.Log("No states available. Cannot set next state.");
                 return false;
             }
 
@@ -44,7 +44,7 @@ namespace _Scripts._AbstractSystems.StateMachine
             var state = GetState<T>();
             if (state == null || (!canSetSameState && state == CurrentState))
             {
-                this.Log("State is null");
+                Debug.Log("State is null");
                 return;
             }
 
