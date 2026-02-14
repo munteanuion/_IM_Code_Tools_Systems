@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Scripts._AbstractSystems.StateMachine
@@ -21,7 +22,7 @@ namespace _Scripts._AbstractSystems.StateMachine
             if (CurrentState == null)
             {
                 CurrentState = States[0];
-                CurrentState.Enter();
+                CurrentState.Enter().Forget();
                 return true;
             }
 
@@ -32,14 +33,14 @@ namespace _Scripts._AbstractSystems.StateMachine
             if (nextState == CurrentState)
                 return false;
 
-            CurrentState.Exit();
+            CurrentState.Exit().Forget();
             PreviousState = CurrentState;
             CurrentState = nextState;
-            CurrentState.Enter();
+            CurrentState.Enter().Forget();
             return true;
         }
 
-        public virtual UniTaskVoid SetState<T>(bool canSetSameState = false) where T : IState
+        public async virtual UniTask SetState<T>(bool canSetSameState = false) where T : IState
         {
             var state = GetState<T>();
             if (state == null || (!canSetSameState && state == CurrentState))
@@ -48,10 +49,11 @@ namespace _Scripts._AbstractSystems.StateMachine
                 return;
             }
 
-            CurrentState?.Exit();
+            if (CurrentState != null) 
+                await CurrentState.Exit();
             PreviousState = CurrentState;
             CurrentState = state;
-            CurrentState.Enter();
+            await CurrentState.Enter();
         }
 
         public virtual void AddState<T>(T state) where T : IState

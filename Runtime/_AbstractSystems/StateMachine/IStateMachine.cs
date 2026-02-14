@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 namespace _Scripts._AbstractSystems.StateMachine
 {
@@ -9,7 +10,7 @@ namespace _Scripts._AbstractSystems.StateMachine
         IState PreviousState { get; }
 
         bool TrySetNextState(bool loopNextState = true);
-        UniTaskVoid SetState<T>(bool canSetSameState = false) where T : IState;
+        UniTask SetState<T>(bool canSetSameState = false) where T : IState;
         void AddState<T>(T state) where T : IState;
         IState GetState<T>() where T : IState;
         void Update(float deltaTime);

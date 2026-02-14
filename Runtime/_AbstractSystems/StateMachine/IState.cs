@@ -1,9 +1,11 @@
-﻿namespace _Scripts._AbstractSystems.StateMachine
+﻿using Cysharp.Threading.Tasks;
+
+namespace _Scripts._AbstractSystems.StateMachine
 {
     public interface IState
     {
-        public UniTaskVoid Enter();
+        public UniTask Enter();
         public void Update(float deltaTime);
-        public UniTaskVoid Exit();
+        public UniTask Exit();
     }
 }
