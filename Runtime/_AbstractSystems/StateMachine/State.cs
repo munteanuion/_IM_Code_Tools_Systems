@@ -2,10 +2,10 @@
 {
     public abstract class State : IState
     {
-        public abstract void Enter();
+        public abstract UniTaskVoid Enter();
 
         public abstract void Update(float deltaTime);
 
-        public abstract void Exit();
+        public abstract UniTaskVoid Exit();
     }
 }

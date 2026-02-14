@@ -2,8 +2,8 @@
 {
     public interface IState
     {
-        public void Enter();
+        public UniTaskVoid Enter();
         public void Update(float deltaTime);
-        public void Exit();
+        public UniTaskVoid Exit();
     }
 }

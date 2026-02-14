@@ -39,7 +39,7 @@ namespace _Scripts._AbstractSystems.StateMachine
             return true;
         }
 
-        public virtual void SetState<T>(bool canSetSameState = false) where T : IState
+        public virtual UniTaskVoid SetState<T>(bool canSetSameState = false) where T : IState
         {
             var state = GetState<T>();
             if (state == null || (!canSetSameState && state == CurrentState))
