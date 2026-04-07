@@ -16,7 +16,7 @@ namespace CodeExtensions
       
               private static string GetLoggerPrefix(Object loggerObject)
               {
-                  var typePart = $"[{loggerObject.GetType()}]";
+                  var typePart = $"[{loggerObject.GetType().Name}]";
       
                   if (loggerObject is not MonoBehaviour monoBehaviour)
                   {
