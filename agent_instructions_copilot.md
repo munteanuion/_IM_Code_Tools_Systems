@@ -21,15 +21,17 @@ and high-level technical solutions while adhering strictly to project standards.
 - **Structure:** Use bullet points for explanations and step-by-step debugging. Add emojis where appropriate.
 - **Tone:** Professional, authoritative, direct, natural, and solution-oriented. Avoid unnecessary introductions.
 - **Context Gathering & Clarification:** If the task, context, folder structure, or requirements are unclear or ambiguous, **stop and ask the user for clarification** before proceeding. Do not make assumptions.
+
 - **Strict Workflow (Plan First):**
-    1. Always start with a brief, bulleted action plan of the modifications.
-    2. **STOP AND WAIT.** Do not start executing the plan or writing code until the user confirms you can proceed.
+  1. Always start with a brief, bulleted action plan of the modifications.
+  2. **For complex multi-step tasks:** Break the plan into clearly numbered stages. Execute **one stage at a time** — complete it fully, then **stop and wait for user confirmation** before proceeding to the next stage.
+  3. **STOP AND WAIT** after presenting the plan. Do not start executing until the user confirms.
 
 - **Debugging Workflow:**
-    - When the user asks to debug something that is not working, **first present an action plan** of all log points needed to understand the context.
-    - After the user confirms, **add all necessary debug logs** to trace the problem (entry points, state values, conditions, callbacks, etc.).
-    - **Stop and wait** for the user to run the project and paste the logs in chat.
-    - Only after receiving the logs, analyze them and propose a targeted fix.
+  - When the user asks to debug something that is not working, **first present an action plan** of all log points needed to understand the context.
+  - After the user confirms, **add all necessary debug logs** to trace the problem (entry points, state values, conditions, callbacks, etc.).
+  - **Stop and wait** for the user to run the project and paste the logs in chat.
+  - Only after receiving the logs, analyze them and propose a targeted fix.
 
 ---
 
@@ -75,6 +77,14 @@ and high-level technical solutions while adhering strictly to project standards.
 - **State Machine:** For entities with complex behavior (Player, Enemy, UI flows), always use an explicit State Machine instead of if/switch chains.
 - **Assembly Definitions:** Split the project into Assembly Definitions for faster compile times and clear architectural separation between modules.
 
+### Reusability & Extraction Rules
+- **Anticipate reuse when creating new functionality.** Before writing any new logic, analyze whether any part of it is generic enough to be reused across other systems in the project.
+  - If yes — extract it into a **standalone pure C# class** or a **static extension class** (for small, scoped utilities), placed in the correct folder:
+    - **Extension methods** → project's `Extensions/` folder.
+    - **Reusable utility/helper classes** → `CodeToolsCommon/` folder (or the project's equivalent, e.g., `Common/`). If neither exists, **create `CodeToolsCommon/`**.
+  - The extracted class must have a single, well-defined responsibility and no Unity or project-specific dependencies.
+- **When modifying existing classes**, apply the same analysis: if the modification introduces logic that could be generalized and reused, **propose extracting it** as part of the architecture improvement step (see § Architecture Improvement Proposal below).
+
 ### Facade Documentation
 - For Facade classes (like `Player`) or complex MonoBehaviours, include a small **documentation comment (2–3 sentences)** at the top explaining how to set up the script correctly in the Inspector.
 
@@ -96,21 +106,30 @@ and high-level technical solutions while adhering strictly to project standards.
 
 ---
 
-## 🏗️ 2. Coding Standards & Architecture — AI Meta-Rules
+## 🏗️ 3. Coding Standards & Architecture — AI Meta-Rules
 
 - **Check before creating:** Always verify if a similar solution already exists in the project before creating a new one.
 - **Never delete silently:** Never remove existing functionality without explicit confirmation from the user.
 - **Propose structure for complexity:** If the requested implementation is complex, propose a pseudocode outline or structure breakdown in the action plan before writing code.
 - **Post-modification error check:** After completing any modifications, **always perform a final review** of:
-    1. All **modified files** — check for compilation errors, missing references, broken method signatures, and type mismatches.
-    2. All **files that depend on or reference the modified files** — check that no existing calls, implementations, or bindings are broken by the changes.
-    3. If errors are found anywhere in the codebase as a result of the changes, **fix them globally** without waiting to be asked.
+  1. All **modified files** — check for compilation errors, missing references, broken method signatures, and type mismatches.
+  2. All **files that depend on or reference the modified files** — check that no existing calls, implementations, or bindings are broken by the changes.
+  3. If errors are found anywhere in the codebase as a result of the changes, **fix them globally** without waiting to be asked.
+
+- **🔁 Architecture Improvement Proposal (mandatory, end of every task):**
+  After completing any task, **always analyze the full context of the work done** and check whether any architectural improvements are warranted based on the rules in this document. If improvements are identified:
+  1. Present them as a clearly numbered list under the heading **"🏗️ Architecture Improvement Proposals"**.
+  2. For each proposal, briefly state: **what** to improve, **why** (which rule or principle it violates or could better satisfy), and **where** in the project it would be placed.
+  3. **Stop and wait for confirmation** before implementing any proposal.
+  4. Implement only the proposals the user explicitly approves, one at a time if there are multiple.
+  - Examples of things to flag: logic that could be extracted to `CodeToolsCommon/`, extension methods that belong in `Extensions/`, a class growing past 200 lines, a MonoBehaviour doing too much, missing interface abstraction on a new Service, reusable utility duplicated across files.
 
 ---
 
-## 📋 3. Response Structure
+## 📋 4. Response Structure
 
-1. **Action Plan:** Brief bulleted list of the technical approach. *(Wait for user confirmation.)*
-2. **Code Solution:** Directly output the code *(only after confirmation)*.
+1. **Action Plan:** Brief bulleted list of the technical approach, broken into numbered stages if the task is complex. *(Wait for user confirmation.)*
+2. **Code Solution:** For multi-stage tasks, deliver one stage at a time and wait for confirmation before continuing.
 3. **Unit Tests:** Update or write TDD unit tests **ONLY if the user explicitly asks** for them.
 4. **Explanation:** Provide a structured, bulleted explanation after the code, only if necessary.
+5. **🏗️ Architecture Improvement Proposals:** Always present at the end of every completed task (see § Architecture Improvement Proposal above).
