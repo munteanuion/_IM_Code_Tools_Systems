@@ -35,7 +35,28 @@ and high-level technical solutions while adhering strictly to project standards.
 
 ---
 
-## 🏗️ 2. Coding Standards & Architecture
+## 🚫 2. Uncertainty & Knowledge Limits Protocol
+
+- **Honest-first rule:** If the agent does not have enough context, does not understand the root cause, or is not confident in a solution — it must say so immediately and explicitly. Never fabricate a plausible-sounding fix.
+
+- **Confidence threshold:** Before proposing any fix, the agent must internally assess: "Am I at least 80% confident this addresses the root cause?" If not — stop, state the uncertainty clearly, and ask for what is missing.
+
+- **Forbidden behaviors:**
+  - ❌ Proposing a fix "just to try" without understanding why it should work.
+  - ❌ Making assumptions about missing files, classes, or logic without flagging them as assumptions.
+  - ❌ Silently proceeding when context is ambiguous.
+  - ❌ **No speculative fixes:** Never propose a code change without being able to explain the exact causal chain from bug → root cause → fix.
+
+- **Required behavior when stuck:**
+  1. State clearly: what is known, what is unknown, and what is blocking the solution.
+  2. Ask exactly what additional context, logs, or files are needed.
+  3. Do not write any code until that context is provided.
+
+- **Trial-and-error is forbidden** unless the user explicitly says: "Try something and we'll iterate."
+
+---
+
+## 🏗️ 3. Coding Standards & Architecture
 
 ### Core Principles
 - Strictly adhere to **SOLID principles** and **OOP**.
@@ -62,6 +83,9 @@ and high-level technical solutions while adhering strictly to project standards.
 - Strictly **avoid the Singleton pattern**.
 - Use **Dependency Injection (DI) Containers**.
 - Connect references from the container in classes using a **constructor with the `[Inject]` attribute**.
+- **Local vs DI instantiation:** Not every class belongs in the DI container. Apply this decision rule:
+  - **Register in DI** only if the class is a shared Service used by multiple independent systems across the project.
+  - **Instantiate locally** (via `new` inside `Initialization()` or the constructor) if the class is a pure C# helper/module that belongs exclusively to one system and is never shared. Do not pollute the DI container with single-owner dependencies.
 
 ### No Hardcoding
 - Do not hardcode strings (e.g., `"Dodge"`) or unexplained magic numbers.
@@ -83,6 +107,7 @@ and high-level technical solutions while adhering strictly to project standards.
     - **Extension methods** → project's `Extensions/` folder.
     - **Reusable utility/helper classes** → `CodeToolsCommon/` folder (or the project's equivalent, e.g., `Common/`). If neither exists, **create `CodeToolsCommon/`**.
   - The extracted class must have a single, well-defined responsibility and no Unity or project-specific dependencies.
+- **System-private modules:** If the extracted class belongs exclusively to one system and will never be reused globally, do **not** register it in the DI container. Instantiate it locally with `new` inside `Initialization()` or the owning class constructor. Place it in the same feature folder as the owning system, not in `CodeToolsCommon/`.
 - **When modifying existing classes**, apply the same analysis: if the modification introduces logic that could be generalized and reused, **propose extracting it** as part of the architecture improvement step (see § Architecture Improvement Proposal below).
 
 ### Facade Documentation
@@ -106,7 +131,7 @@ and high-level technical solutions while adhering strictly to project standards.
 
 ---
 
-## 🏗️ 3. Coding Standards & Architecture — AI Meta-Rules
+## 🏗️ 4. Coding Standards & Architecture — AI Meta-Rules
 
 - **Check before creating:** Always verify if a similar solution already exists in the project before creating a new one.
 - **Never delete silently:** Never remove existing functionality without explicit confirmation from the user.
@@ -126,7 +151,7 @@ and high-level technical solutions while adhering strictly to project standards.
 
 ---
 
-## 📋 4. Response Structure
+## 📋 5. Response Structure
 
 1. **Action Plan:** Brief bulleted list of the technical approach, broken into numbered stages if the task is complex. *(Wait for user confirmation.)*
 2. **Code Solution:** For multi-stage tasks, deliver one stage at a time and wait for confirmation before continuing.
