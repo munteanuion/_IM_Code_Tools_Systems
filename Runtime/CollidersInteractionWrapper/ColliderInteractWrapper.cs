@@ -26,17 +26,59 @@ namespace CollidersInteractionWrapper
         private List<Collider> _activeTriggers = new();
         private List<Collision> _activeCollisions = new();
 
-        public IReadOnlyList<Collider> ActiveTriggers => _activeTriggers;
-        public IReadOnlyList<Collision> ActiveCollisions => _activeCollisions;
         
-        public bool HasOnTriggers => _activeTriggers.Count > 0;
-        public bool HasOnCollisions => _activeCollisions.Count > 0;
+        public IReadOnlyList<Collider> ActiveTriggers { get {
+                CleanupInactive();
+                return _activeTriggers; }
+        }
 
+        public IReadOnlyList<Collision> ActiveCollisions { get {
+                CleanupInactive();
+                return _activeCollisions; }
+        }
+
+        public bool HasOnTriggers { get {
+                CleanupInactive();
+                return _activeTriggers.Count > 0; }
+        }
+
+        public bool HasOnCollisions { get {
+                CleanupInactive();
+                return _activeCollisions.Count > 0; }
+        }
+
+        
         public void SetFilterSettings(InteractionFilterSettings settings)
         {
             _filterSettings = settings;
         }
+        
+        
+        private void CleanupInactive()
+        {
+            for (int i = _activeTriggers.Count - 1; i >= 0; i--)
+            {
+                Collider col = _activeTriggers[i];
+                if (col == null || !col.gameObject.activeInHierarchy)
+                {
+                    _activeTriggers.RemoveAt(i);
+                    OnTrigger_Exit?.Invoke(col);
+                }
+            }
 
+            for (int i = _activeCollisions.Count - 1; i >= 0; i--)
+            {
+                Collision col = _activeCollisions[i];
+                if (col.collider == null || !col.gameObject.activeInHierarchy)
+                {
+                    _activeCollisions.RemoveAt(i);
+                    OnCollision_Exit?.Invoke(col);
+                }
+            }
+        }
+
+        
+        
         private bool IsValid(GameObject obj)
         {
             if (_filterSettings == null) return true;
