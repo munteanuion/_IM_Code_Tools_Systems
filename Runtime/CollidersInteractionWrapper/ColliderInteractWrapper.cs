@@ -23,8 +23,8 @@ namespace CollidersInteractionWrapper
         public UnityEvent<Collision> OnCollision_Enter = new();
         public UnityEvent<Collision> OnCollision_Exit = new();
 
-        private readonly List<Collider> _activeTriggers = new();
-        private readonly List<Collision> _activeCollisions = new();
+        private List<Collider> _activeTriggers = new();
+        private List<Collision> _activeCollisions = new();
 
         public IReadOnlyList<Collider> ActiveTriggers => _activeTriggers;
         public IReadOnlyList<Collision> ActiveCollisions => _activeCollisions;
