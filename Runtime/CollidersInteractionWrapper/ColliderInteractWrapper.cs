@@ -29,8 +29,8 @@ namespace CollidersInteractionWrapper
         public IReadOnlyList<Collider> ActiveTriggers => _activeTriggers;
         public IReadOnlyList<Collision> ActiveCollisions => _activeCollisions;
         
-        public bool HasActiveTriggers => _activeTriggers.Count > 0;
-        public bool HasActiveCollisions => _activeCollisions.Count > 0;
+        public bool HasOnTriggers => _activeTriggers.Count > 0;
+        public bool HasOnCollisions => _activeCollisions.Count > 0;
 
         public void SetFilterSettings(InteractionFilterSettings settings)
         {
