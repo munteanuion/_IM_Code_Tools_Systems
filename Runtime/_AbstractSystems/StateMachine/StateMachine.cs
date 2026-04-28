@@ -11,7 +11,6 @@ namespace _Scripts._AbstractSystems.StateMachine
         public List<IState> States { get; protected set; } = new();
 
 
-        public StateMachine() { }
 
         public virtual bool TrySetNextState(bool loopNextState = true)
         {
